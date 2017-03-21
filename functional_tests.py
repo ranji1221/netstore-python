@@ -3,8 +3,9 @@ import unittest
 
 class NewVisitorTest(unittest.TestCase):
 	def setUp(self):
-		self.browser = webdriver.Chrome()
-		self.browser.implicitly_wait(3)
+		self.browser = webdriver.Chrome()       #需要下载chrome浏览器的驱动，并在环境变量path中指定
+		#self.browser = webdriver.Firefox()		#需要下载firefox浏览器的驱动，并在环境变量path中指定
+		self.browser.implicitly_wait(3)      #如果用火狐浏览器似乎这个代码有个bug
 	def setDown(self):
 		self.browser.quit()
 	def test_can_start_a_list_and_retrieve_it_later(self):

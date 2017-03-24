@@ -1,9 +1,11 @@
+from django.test import LiveServerTestCase
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 import unittest
 import time
 
-class NewVisitorTest(unittest.TestCase):
+#class NewVisitorTest(unittest.TestCase):
+class NewVisitorTest(LiveServerTestCase):	#集成django框架的功能测试类
 	def setUp(self):
 		self.browser = webdriver.Chrome()       #需要下载chrome浏览器的驱动，并在环境变量path中指定
 		#self.browser = webdriver.Firefox()		#需要下载firefox浏览器的驱动，并在环境变量path中指定
@@ -19,7 +21,8 @@ class NewVisitorTest(unittest.TestCase):
 	def test_can_start_a_list_and_retrieve_it_later(self):
 		#伊迪斯听说有一个很酷的在线待办事项应用
 		#她去看了这个应用的首页
-		self.browser.get('http://localhost:8000')
+		#self.browser.get('http://localhost:8000')
+		self.browser.get(self.live_server_url)     #django测试框架所带的属性，不用把地址写死了
 
 		#她注意到网页的标题和头部都包含了"To-Do"这个词
 		self.assertIn('To-Do',self.browser.title)
@@ -82,6 +85,6 @@ class NewVisitorTest(unittest.TestCase):
 		
 		#她很满意，去睡觉了
 		
-if __name__ == '__main__':
-	unittest.main()
+'''if __name__ == '__main__':
+	unittest.main()'''    #使用Django的测试，这个也可以去掉了
 
